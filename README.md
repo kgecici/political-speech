@@ -13,13 +13,12 @@ It can be url1, url2 or urlSourceA, urlSourceB etc.
 - I assumed this api will public, so there is no jwt auth or any other
 
 Response:
-mostSpeeches: Which politician gave the most speeches in 2013? Here all 2013 speeches are summed per politician"
-mostSecurity: "Which politician gave the most speeches on ""homeland security""? Here all speeches with ""homeland security"" in the topic are summed per politician
-leastWordy: "Which politician spoke the fewest words overall? Here all speeches are summed per politician"
+- mostSpeeches: Which politician gave the most speeches in 2013? Here all 2013 speeches are summed per politician"
+- mostSecurity: "Which politician gave the most speeches on ""homeland security""? Here all speeches with ""homeland security"" in the topic are summed per politician
+- leastWordy: "Which politician spoke the fewest words overall? Here all speeches are summed per politician"
 
 
 Further Improvements:
 - UrlContentReader does not cache any url requests. This part would be bottleneck since network requests are time consuming. Caching can be added here
 - UrlContentReader does not have certain timeout. It can be added
 - Api does not have any authentication. It can be added
-- 

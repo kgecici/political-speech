@@ -1,4 +1,4 @@
-package com.example.domain
+package org.political.speeches.domain
 
 data class Evaluation(
     val mostSpeechesInYear: Int?,

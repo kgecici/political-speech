@@ -1,4 +1,4 @@
-package com.example.plugins
+package org.political.speeches.plugins
 
 import com.fasterxml.jackson.databind.*
 import io.ktor.serialization.jackson.*
@@ -13,9 +13,5 @@ fun Application.configureSerialization() {
             enable(SerializationFeature.INDENT_OUTPUT)
         }
     }
-    routing {
-        get("/json/jackson") {
-            call.respond(mapOf("hello" to "world"))
-        }
-    }
+
 }

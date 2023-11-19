@@ -1,6 +1,6 @@
-package com.example.domain
+package org.political.speeches.domain
 
-import com.example.extension.joinKeysWhenValuesEqualTo
+import org.political.speeches.extension.joinKeysWhenValuesEqualTo
 
 
 class SpeechFilter(private val speeches: List<Speech>) {

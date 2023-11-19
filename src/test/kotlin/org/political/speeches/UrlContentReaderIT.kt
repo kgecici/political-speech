@@ -1,6 +1,6 @@
-package com.example
+package org.political.speeches
 
-import com.example.domain.UrlContentReader
+import org.political.speeches.domain.UrlContentReader
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -10,26 +10,12 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-class UrlContentReaderIntegrationTest {
-
-    private val serverPort = 8088 // TODO make it random port
-    private lateinit var server: NettyApplicationEngine
-
-    @Before
-    fun setUp() {
-        server = embeddedServer(Netty, port = serverPort, module = Application::testModule)
-        server.start()
-    }
-
-    @After
-    fun tearDown() {
-        server.stop(0, 0)
-    }
+class UrlContentReaderIntegrationTest : ITBase() {
 
     @Test(expected = FileFormatSecurityException::class)
     fun givenMaliciousUrl_thenReadOverHttp_thenFails() {
         // WHEN
-        UrlContentReader().readContents(listOf("http://localhost:$serverPort/malicious.csv"))
+        UrlContentReader().readContents(setOf("http://localhost:$serverPort/malicious.csv"))
     }
 
     @Test
@@ -37,7 +23,7 @@ class UrlContentReaderIntegrationTest {
         // GIVEN
 
         // WHEN
-        val response = UrlContentReader().readContents(listOf("http://localhost:$serverPort/data1.csv"))
+        val response = UrlContentReader().readContents(setOf("http://localhost:$serverPort/data1.csv"))
 
         // THEN
         assertNotNull(response)
@@ -50,7 +36,7 @@ class UrlContentReaderIntegrationTest {
         // GIVEN
 
         // WHEN
-        val response = UrlContentReader().readContents(listOf("http://localhost:$serverPort/data1.csv",
+        val response = UrlContentReader().readContents(setOf("http://localhost:$serverPort/data1.csv",
             "http://localhost:$serverPort/data1-duplicate.csv"))
 
         // THEN

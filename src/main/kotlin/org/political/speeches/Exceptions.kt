@@ -12,7 +12,7 @@ open class DataInconsistencyException(message: String? = null, base: String = "I
     ValidationExceptionBase(message, base)
 open class DuplicateUrlException(message: String? = null, base: String = "Duplicate Url") :
     ValidationExceptionBase(message, base)
-open class NoQueryParamStartsWithUrl(message: String? = null, base: String = "No urlX oparam given") :
+open class NoQueryParamStartsWithUrl(message: String? = null, base: String = "No url param given") :
     ValidationExceptionBase(message, base)
 
 open class UrlCannotReachable(message: String? = null, base: String = "Url cannot reachable") :

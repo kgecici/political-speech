@@ -1,0 +1,86 @@
+openapi: "3.0.3"
+info:
+  title: "Political Speech Evaluation API"
+  description: "Political Speech Evaluation API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /evaluation:
+    get:
+      parameters:
+        - name: "url1"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+          description: "The first url to load and evaluate."
+          example: "https://raw.githubusercontent.com/kgecici/political-speech-data/main/political-speeches-1.csv"
+        - name: "url2"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+          description: "url to load and evaluate."
+        - name: "url3"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+          description: "url to load and evaluate."
+      description: "* The endpoint gets query parameter and expect them start with url.<br/>
+It can bean be url1, url2 or urlSourceA, urlSourceB etc.<br/>
+If no query param starts with 'url', returns http bad request<br/>
+If 2 or more url value are same, returns bad request to prevent wrong usage. for ex here both url1 and url2 has same value below<br/>
+&nbsp;&nbsp;&nbsp;/evaluation?url1=http://example.com/data1.csv&url2=http://example.com/data1.csv<br/>
+If given url's contains same speaker, topic and date it compares number of words, <br/>
+&nbsp;&nbsp;&nbsp; If the word counts are same, it picks one of them (for example if you have 2 url with same content, it works same as giving one of them url).<br/> 
+&nbsp;&nbsp;&nbsp; If the word counts are different, gives error. Because there is an inconsistency between data<br/>
+If given url does not have valid csv header(\"Speaker;Topic;Date;Words\"), returns error. Header might have spaces but not more than 2 times size of total default header length<br/>
+To prevent malicious url requests, it reads required number of bytes from http(2 * length of \"Speaker;Topic;Date;Words\") and if header not found returns error.<br/>
+<b>All url s are loaded and combined in one list</b><br/>
+"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mostSpeeches:
+                    type: string
+                    description: "Which politician gave the most speeches in 2013? Here all 2013 speeches are summed per politician"
+                  mostSecurity:
+                    type: string
+                    description: "Which politician gave the most speeches on homeland security? Here all speeches with homeland security in the topic are summed per politician"
+                  leastWordy:
+                    type: string
+                    description: "Which politician spoke the fewest words overall? Here all speeches are summed per politician"
+              examples:
+                Example#1:
+                  value: "{
+  mostSpeeches: string|null,
+  mostSecurity: string|null,
+  leastWordy: string|null
+}"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: "object"
+              examples:
+                Example#1:
+                  value: { "error": "Invalid request parameters" }
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                type: "object"
+              examples:
+                Example#1:
+                  value: { "error": "Internal server error" }
+components:
+  schemas:

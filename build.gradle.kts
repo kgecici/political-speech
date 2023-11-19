@@ -31,7 +31,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
     implementation("io.ktor:ktor-serialization-jackson-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-
+    implementation("io.ktor:ktor-server-swagger-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("io.ktor:ktor-server-tests-jvm")
 

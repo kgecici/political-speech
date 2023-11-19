@@ -5,6 +5,7 @@ import io.ktor.server.netty.*
 import org.political.speeches.plugins.configureExceptionHandling
 import org.political.speeches.plugins.configureRouting
 import org.political.speeches.plugins.configureSerialization
+import org.political.speeches.plugins.configureSwagger
 
 fun main(args: Array<String>) = EngineMain.main(args)
 
@@ -12,5 +13,8 @@ fun main(args: Array<String>) = EngineMain.main(args)
 fun Application.module(testing: Boolean = false) {
     configureSerialization()
     configureExceptionHandling()
+    configureSwagger()
     configureRouting()
+
+
 }

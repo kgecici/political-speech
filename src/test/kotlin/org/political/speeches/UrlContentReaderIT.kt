@@ -10,7 +10,21 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-class UrlContentReaderIntegrationTest : ITBase() {
+class UrlContentReaderIT  {
+
+    private val serverPort = 8088 // TODO make it random port
+    private lateinit var server: NettyApplicationEngine
+
+    @Before
+    fun setUp() {
+        server = embeddedServer(Netty, port = serverPort, module = Application::testModule)
+        server.start()
+    }
+
+    @After
+    fun tearDown() {
+        server.stop(0, 0)
+    }
 
     @Test(expected = FileFormatSecurityException::class)
     fun givenMaliciousUrl_thenReadOverHttp_thenFails() {

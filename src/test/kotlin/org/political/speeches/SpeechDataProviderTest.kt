@@ -1,11 +1,6 @@
-package com.example
+package org.political.speeches
 
-import com.example.domain.SpeechDataProvider
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import org.junit.After
-import org.junit.Before
+import org.political.speeches.domain.SpeechDataProvider
 import kotlin.test.*
 
 class SpeechDataProviderTest {
@@ -26,7 +21,6 @@ class SpeechDataProviderTest {
             "Jane Smith;Education;2022-02-01;700"
         )
 
-        // Mock url2ContentLinesMap
         val url2ContentLinesMap = mapOf(
             csvUrl1 to lines1,
             csvUrl2 to lines2
@@ -55,17 +49,15 @@ class SpeechDataProviderTest {
             "Jane Smith;Education;2022-02-01;701"
         )
 
-        // Mock url2ContentLinesMap
         val url2ContentLinesMap = mapOf(
             csvUrl1 to lines1,
             csvUrl2 to lines2
         )
 
         // WHEN
-        val parseAndValidate = SpeechDataProvider().parseAndValidate(url2ContentLinesMap)
+        SpeechDataProvider().parseAndValidate(url2ContentLinesMap)
 
-        // THEN
-        // Throws exception
+        // THEN Throws exception
     }
 
 
@@ -79,7 +71,33 @@ class SpeechDataProviderTest {
         // WHEN
         SpeechDataProvider().parseAndValidate(url2ContentLinesMap)
 
-        // THEN
-        // Throws exception
+        // THEN Throws exception
+    }
+
+
+    @Test(expected =  FieldParseException::class)
+    fun givenFileHasWrongDateFormat_whenParsedAndNormalized_thenThrowsError() {
+        // GIVEN
+        val url2ContentLinesMap = mapOf(
+            "http://example.com/data1.csv" to listOf("John Doe;Technology;2022-99-99;200"),
+        )
+
+        // WHEN
+        SpeechDataProvider().parseAndValidate(url2ContentLinesMap)
+
+        // THEN Throws exception
+    }
+
+    @Test(expected =  FieldParseException::class)
+    fun givenFileHasWrongWordCount_whenParsedAndNormalized_thenThrowsError() {
+        // GIVEN
+        val url2ContentLinesMap = mapOf(
+            "http://example.com/data1.csv" to listOf("John Doe;Technology;2022-01-01;notnumber"),
+        )
+
+        // WHEN
+        SpeechDataProvider().parseAndValidate(url2ContentLinesMap)
+
+        // THEN Throws exception
     }
 }

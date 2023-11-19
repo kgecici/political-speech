@@ -15,5 +15,4 @@ fun Application.configureRouting() {
             call.respond(evaluationResponse)
         }
     }
-
 }

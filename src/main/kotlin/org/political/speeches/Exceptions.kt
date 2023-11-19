@@ -1,6 +1,6 @@
 package org.political.speeches
 
-open class ValidationExceptionBase(message: String? = null, base: String = "Invalid property") :
+open class ValidationExceptionBase(message: String? = null, base: String) :
     Exception(message(base, message))
 
 open class UnexpectedFileFormat(message: String? = null, base: String = "Unexpected File Format") :
@@ -17,7 +17,7 @@ open class NoQueryParamStartsWithUrl(message: String? = null, base: String = "No
 
 open class UrlCannotReachable(message: String? = null, base: String = "Url cannot reachable") :
     ValidationExceptionBase(message, base)
-open class FieldParseError(message: String? = null, base: String = "Field cannot be parsed") :
+open class FieldParseException(message: String? = null, base: String = "Field cannot be parsed") :
     ValidationExceptionBase(message, base)
 
 private fun message(base: String, message: String?) = base + if (message != null) ": $message" else ""

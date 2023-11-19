@@ -7,11 +7,11 @@ plugins {
     id("io.ktor.plugin") version "2.3.6"
 }
 
-group = "com.example"
+group = "org.political.speech"
 version = "0.0.1"
 
 application {
-    mainClass.set("com.example.ApplicationKt")
+    mainClass.set("org.political.speech.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -23,20 +23,16 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-auth-jvm")
-    implementation("io.ktor:ktor-server-auth-jwt-jvm")
-    implementation("io.ktor:ktor-server-metrics-jvm")
+    implementation("io.ktor:ktor-server-netty-jvm")
+    implementation("io.ktor:ktor-client-core")
+    implementation("io.ktor:ktor-client-json")
+    implementation("io.ktor:ktor-server-netty")
+    implementation("io.ktor:ktor-server-status-pages-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
     implementation("io.ktor:ktor-serialization-jackson-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("com.zaxxer", "HikariCP", libs.versions.hikari.get())
-    implementation("com.h2database", "h2", libs.versions.h2.get())
-    implementation("org.flywaydb", "flyway-core", libs.versions.flyway.get())
-    implementation("org.jetbrains.exposed", "exposed-dao", libs.versions.exposed.get())
-    implementation("org.jetbrains.exposed", "exposed-jdbc", libs.versions.exposed.get())
-    implementation("org.jetbrains.exposed", "exposed-java-time", libs.versions.exposed.get())
 
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("io.ktor:ktor-server-tests-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
 }

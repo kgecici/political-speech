@@ -1,8 +1,8 @@
-package com.example
+package org.political.speeches
 
-import com.example.domain.Evaluation
-import com.example.domain.Speech
-import com.example.domain.SpeechFilter
+import org.political.speeches.domain.Evaluation
+import org.political.speeches.domain.Speech
+import org.political.speeches.domain.SpeechFilter
 import java.time.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,7 +13,7 @@ class SpeechFilterTest {
 
 
     @Test
-    fun GivenEmptyListWhenEvaluatedThenReturnsNullForEachResponse() {
+    fun givenEmptyList_whenEvaluated_thenReturnsNullForEachResponse() {
         // GIVEN
         val evaluation = Evaluation(mostSpeechesInYear = 2020, mostSpeechesInTopic = "technology")
 
@@ -28,7 +28,7 @@ class SpeechFilterTest {
     }
 
     @Test
-    fun givenDifferentYearsForSpeakersWhenFindMostSpeechesThenFindsOnly2013() {
+    fun givenDifferentYearsForSpeakers_whenFindMostSpeeches_thenFindsOnly2013() {
         val testData = listOf(
             Speech("John Doe", "homeland security", LocalDate.of(2012, 1, 4), 1000),
             Speech("John Doe", "homeland security", LocalDate.of(2013, 1, 5), 1000),
@@ -49,7 +49,7 @@ class SpeechFilterTest {
     }
 
     @Test
-    fun givenDifferentTopicsForSpeakersWhenFindMostSpeechesThenFindsOnly2013() {
+    fun givenDifferentTopicsForSpeakers_whenFindMostSpeeches_thenFindsOnly2013() {
         val testData = listOf(
             Speech("John Doe", "homeland security", LocalDate.of(2012, 1, 4), 1000),
             Speech("John Doe", "homeland security", LocalDate.of(2013, 1, 5), 1000),
@@ -70,7 +70,7 @@ class SpeechFilterTest {
     }
 
     @Test
-    fun givenDifferentLessWordsInMultipleSpeechWhenFindLeastWordySpeakersThenFindsWithSummingAllSpeeches() {
+    fun givenDifferentLessWordsInMultipleSpeech_whenFindLeastWordySpeakers_thenFindsWithSummingAllSpeeches() {
         val testData = listOf(
             Speech("John Doe", "homeland security", LocalDate.of(2012, 1, 4), 500),
             Speech("John Doe", "homeland security", LocalDate.of(2013, 1, 5), 500),
@@ -89,7 +89,7 @@ class SpeechFilterTest {
     }
 
     @Test
-    fun GivenSecuritySpeechWordsEqualWhenEvaluatedThenReturnsCommaSeperatedPoliticians() {
+    fun givenSecuritySpeechWordsEqual_whenEvaluated_thenReturnsCommaSeperatedPoliticians() {
         val testData = listOf(
             Speech("John Doe", "homeland security", LocalDate.of(2012, 1, 4), 1000),
             Speech("Jane Smith", "homeland security", LocalDate.of(2013, 1, 5), 1000),
@@ -119,7 +119,7 @@ class SpeechFilterTest {
     }
 
     @Test
-    fun GivenDistinctSpeakersWhen() {
+    fun givenDistinctSpeakers_whenEvaluated_thenReturnsCorrectResponse() {
         // GIVEN
         val testData = listOf(
             Speech("John Doe", "homeland security", LocalDate.of(2012, 1, 4), 15000),
